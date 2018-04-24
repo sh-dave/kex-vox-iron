@@ -36,9 +36,8 @@ class IronVoxLoader {
 	}
 
 	static function walkNodeGraph( vox: Vox, url: String, done: IronVox -> Void, out: IronVox, tmp ) {
-		var i = 0;
-
-		for (model in vox.models) {
+		for (i in 0...vox.models.length) {
+			var model = vox.models[i];
 			var mesh = MeshFactory.createRawIronMeshData(
 				VoxelTools.newVoxelMesh(model.map(function( v ) : Voxel return {
 					x: v.x, y: v.y, z: v.z, color: {
@@ -48,8 +47,8 @@ class IronVoxLoader {
 						a: vox.palette[v.colorIndex].a / 255,
 					}
 				})),
-				'${url}_mesh_${i++}',
-				0.0, -64.0
+				'${url}_mesh_${i}',
+				-vox.sizes[i].x / 2, -vox.sizes[i].y / 2, -vox.sizes[i].z / 2
 			);
 
 			out.mesh_datas.push(mesh);
@@ -95,7 +94,7 @@ class IronVoxLoader {
 						name: '${url}_obj_${tmp.objCounter++}',
 						type: 'mesh_object',
 						data_ref: '${url}_mesh_${model.modelId}',
-						material_refs: ['MyMaterial'],
+						material_refs: ['MyMaterial'], // TODO (DK) how to pass this in, do we actually want to?
 						transform: { values: transformData },
 					}
 
@@ -107,6 +106,8 @@ class IronVoxLoader {
 	static function getTransformation( att: Dict, parent: FastMatrix4 ) : FastMatrix4 {
 		var r = VoxTools.getRotationFromDict(att, '_r');
 		var t = VoxTools.getTranslationFromDict(att, '_t');
-		return FastMatrix4.translation(t.x, t.y, t.z).multmat(FastMatrix4.rotation(r.x, r.y, r.z));
+		return parent
+			.multmat(FastMatrix4.translation(t.x, t.y, t.z))
+			.multmat(FastMatrix4.rotation(r.x, r.y, r.z));
 	}
 }
