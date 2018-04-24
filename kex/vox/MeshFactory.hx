@@ -3,7 +3,7 @@ package kex.vox;
 import iron.data.SceneFormat;
 
 class MeshFactory {
-	public static function createRawIronMeshData( triangles: Array<Triangle>, name: String, x = 0.0, y = 0.0 ) : iron.data.TMeshData {
+	public static function createRawIronMeshData( triangles: Array<Triangle>, name: String, x = 0.0, y = 0.0, z = 0.0 ) : iron.data.TMeshData {
 		var vertexCount = triangles.length * 3;
 		var positions = new kha.arrays.Float32Array(vertexCount * 3);
 		var normals = new kha.arrays.Float32Array(vertexCount * 3);
@@ -19,7 +19,7 @@ class MeshFactory {
 			var t = triangles[i].v1;
 			positions.set(pi++, t.position.x + x);
 			positions.set(pi++, t.position.y + y);
-			positions.set(pi++, t.position.z);
+			positions.set(pi++, t.position.z + z);
 			colors.set(ci++, t.color.r);
 			colors.set(ci++, t.color.g);
 			colors.set(ci++, t.color.b);
@@ -30,7 +30,7 @@ class MeshFactory {
 			t = triangles[i].v2;
 			positions.set(pi++, t.position.x + x);
 			positions.set(pi++, t.position.y + y);
-			positions.set(pi++, t.position.z);
+			positions.set(pi++, t.position.z + z);
 			colors.set(ci++, t.color.r);
 			colors.set(ci++, t.color.g);
 			colors.set(ci++, t.color.b);
@@ -41,7 +41,7 @@ class MeshFactory {
 			t = triangles[i].v3;
 			positions.set(pi++, t.position.x + x);
 			positions.set(pi++, t.position.y + y);
-			positions.set(pi++, t.position.z);
+			positions.set(pi++, t.position.z + z);
 			colors.set(ci++, t.color.r);
 			colors.set(ci++, t.color.g);
 			colors.set(ci++, t.color.b);
