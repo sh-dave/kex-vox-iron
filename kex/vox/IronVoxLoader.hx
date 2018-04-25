@@ -108,6 +108,11 @@ class IronVoxLoader {
 		var t = VoxTools.getTranslationFromDict(att, '_t');
 		return parent
 			.multmat(FastMatrix4.translation(t.x, t.y, t.z))
-			.multmat(r);//FastMatrix4.rotation(r.x, r.y, r.z));
+			.multmat(new FastMatrix4(
+				r._00,	r._10,	r._20,	0,
+				r._01,	r._11,	r._21,	0,
+				r._02,	r._12,	r._22,	0,
+				0,		0,		0,		1
+			));
 	}
 }
