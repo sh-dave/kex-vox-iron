@@ -48,7 +48,7 @@ class IronVoxLoader {
 					}
 				})),
 				'${url}_mesh_${i}',
-				-vox.sizes[i].x / 2, -vox.sizes[i].y / 2, -vox.sizes[i].z / 2
+				-vox.sizes[i].x / 2, -vox.sizes[i].y / 2, -vox.sizes[i].z / 2 // TODO (DK) Math.floor() ?
 			);
 
 			out.mesh_datas.push(mesh);
@@ -108,6 +108,6 @@ class IronVoxLoader {
 		var t = VoxTools.getTranslationFromDict(att, '_t');
 		return parent
 			.multmat(FastMatrix4.translation(t.x, t.y, t.z))
-			.multmat(FastMatrix4.rotation(r.x, r.y, r.z));
+			.multmat(r);//FastMatrix4.rotation(r.x, r.y, r.z));
 	}
 }
