@@ -21,7 +21,7 @@ class IronVoxLoader {
 		kha.Assets.loadBlobFromPath(url, parseVox.bind(_, url, done, failed), failed);
 
 	static function parseVox( blob: Blob, url: String, done: IronVox -> Void, failed: AssetError -> Void ) {
-		switch new VoxReader(blob.toBytes()).read() {
+		switch new VoxReader(new haxe.io.BytesInput(blob.toBytes())).read() {
 			case null:
 				failed({
 					url: url,
