@@ -18,7 +18,7 @@ typedef IronVox = {
 
 class IronVoxLoader {
 	public static function loadVoxFromPath( url: String, done: IronVox -> Void, failed: AssetError -> Void )
-		kha.Assets.loadBlobFromPath(url, parseVox.bind(_, url, done, failed), failed);
+		kha.Assets.loadBlobFromPath(url, parseVox.bind(_, haxe.io.Path.withoutDirectory(url), done, failed), failed);
 
 	static function parseVox( blob: Blob, url: String, done: IronVox -> Void, failed: AssetError -> Void ) {
 		switch new VoxReader(new haxe.io.BytesInput(blob.toBytes())).read() {
