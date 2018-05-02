@@ -41,10 +41,10 @@ class IronVoxLoader {
 			var mesh = MeshFactory.createRawIronMeshData(
 				VoxelTools.newVoxelMesh(model.map(function( v ) : Voxel return {
 					x: v.x, y: v.y, z: v.z, color: {
-						r: vox.palette[v.colorIndex].r / 255,
-						g: vox.palette[v.colorIndex].g / 255,
-						b: vox.palette[v.colorIndex].b / 255,
-						a: vox.palette[v.colorIndex].a / 255,
+						r: vox.palette[v.colorIndex].r,// / 255,
+						g: vox.palette[v.colorIndex].g,// / 255,
+						b: vox.palette[v.colorIndex].b,// / 255,
+						a: vox.palette[v.colorIndex].a,// / 255,
 					}
 				})),
 				'${url}_mesh_${i}',

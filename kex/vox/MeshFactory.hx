@@ -20,9 +20,9 @@ class MeshFactory {
 			positions.set(pi++, t.position.x + x);
 			positions.set(pi++, t.position.y + y);
 			positions.set(pi++, t.position.z + z);
-			colors.set(ci++, t.color.r);
-			colors.set(ci++, t.color.g);
-			colors.set(ci++, t.color.b);
+			colors.set(ci++, t.color.r / 255);
+			colors.set(ci++, t.color.g / 255);
+			colors.set(ci++, t.color.b / 255);
 			normals.set(ni++, t.normal.x);
 			normals.set(ni++, t.normal.y);
 			normals.set(ni++, t.normal.z);
@@ -31,9 +31,9 @@ class MeshFactory {
 			positions.set(pi++, t.position.x + x);
 			positions.set(pi++, t.position.y + y);
 			positions.set(pi++, t.position.z + z);
-			colors.set(ci++, t.color.r);
-			colors.set(ci++, t.color.g);
-			colors.set(ci++, t.color.b);
+			colors.set(ci++, t.color.r / 255);
+			colors.set(ci++, t.color.g / 255);
+			colors.set(ci++, t.color.b / 255);
 			normals.set(ni++, t.normal.x);
 			normals.set(ni++, t.normal.y);
 			normals.set(ni++, t.normal.z);
@@ -42,9 +42,9 @@ class MeshFactory {
 			positions.set(pi++, t.position.x + x);
 			positions.set(pi++, t.position.y + y);
 			positions.set(pi++, t.position.z + z);
-			colors.set(ci++, t.color.r);
-			colors.set(ci++, t.color.g);
-			colors.set(ci++, t.color.b);
+			colors.set(ci++, t.color.r / 255);
+			colors.set(ci++, t.color.g / 255);
+			colors.set(ci++, t.color.b / 255);
 			normals.set(ni++, t.normal.x);
 			normals.set(ni++, t.normal.y);
 			normals.set(ni++, t.normal.z);
