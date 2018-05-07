@@ -25,16 +25,20 @@ private typedef Tmp = {
 
 class IronVoxLoader {
 	public static function loadVoxFromPath( url: String, done: IronVox -> Void, failed: AssetError -> Void )
-		kha.Assets.loadBlobFromPath(url, parseVox.bind(_, haxe.io.Path.withoutDirectory(url), done, failed), failed);
+		kha.Assets.loadBlobFromPath(
+			url,
+			parseVox.bind(_, haxe.io.Path.withoutDirectory(url), done, failed),
+			failed
+		);
 
-	static function parseVox( blob: Blob, url: String, done: IronVox -> Void, failed: AssetError -> Void ) {
-		switch new VoxReader(new haxe.io.BytesInput(blob.toBytes())).read() {
-			case null:
+	static function parseVox( blob: Blob, url: String, done: IronVox -> Void, failed: AssetError -> Void )
+		VoxReader.read(blob.toBytes().getData(), function( ?vox, ?err ) {
+			if (err != null) {
 				failed({
 					url: url,
-					error: 'failed to read bytes'
+					error: err,
 				});
-			case vox:
+			} else {
 				var data = {
 					out: { vox: vox, mesh_datas: [], objects: [] },
 					tmp: { objCounter: 0, t: [FastMatrix4.identity()] },
@@ -52,8 +56,8 @@ class IronVoxLoader {
 				);
 
 				done(data.out);
-		}
-	}
+			}
+		});
 
 	static function walker_begin( vox: Vox, url: String, d: { out: IronVox, tmp: Tmp } ) {
 		for (i in 0...vox.models.length) {
@@ -68,7 +72,7 @@ class IronVoxLoader {
 					}
 				})),
 				'${url}_mesh_${i}',
-				-vox.sizes[i].x / 2, -vox.sizes[i].y / 2, -vox.sizes[i].z / 2 // TODO (DK) Math.floor() ?
+				-Math.floor(vox.sizes[i].x / 2), -Math.floor(vox.sizes[i].y / 2), -Math.floor(vox.sizes[i].z / 2)
 			);
 
 			d.out.mesh_datas.push(mesh);
